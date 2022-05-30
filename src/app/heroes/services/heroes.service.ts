@@ -20,4 +20,10 @@ export class HeroesService {
   getHeroePorId(id: string): Observable<Heroe> {
     return this._http.get<Heroe>(`${this._apiUrl}/heroes/${id}`);
   }
+
+  getSugerencias(termino: string): Observable<Heroe[]> {
+    return this._http.get<Heroe[]>(
+      `${this._apiUrl}/heroes?q=${termino}&_limit=6`
+    );
+  }
 }
