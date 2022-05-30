@@ -8,7 +8,14 @@ import { switchMap } from 'rxjs';
 @Component({
   selector: 'app-agregar',
   templateUrl: './agregar.component.html',
-  styles: [],
+  styles: [
+    `
+      img {
+        width: 100%;
+        border-radius: 10px;
+      }
+    `,
+  ],
 })
 export class AgregarComponent implements OnInit {
   publishers = [
@@ -38,6 +45,9 @@ export class AgregarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if (!this._route.url.includes('editar')) {
+      return;
+    }
     this._activatedRoute.params
       .pipe(switchMap(({ id }) => this._heroesService.getHeroePorId(id)))
       .subscribe((heroe) => (this.heroe = heroe));
